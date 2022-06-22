@@ -5,12 +5,13 @@ const bcrypt = require("bcrypt");
 //update a user
 router.put("/:id", async (req, res) => {
   //put("/:id") allows to use any id number
+
   if (req.body.userId === req.params.id || req.user.isAdmin) {
     //if the account's user id matches with the id in the url || or the user is an admin
     if (req.body.password) {
       //if user try to update the password, it should be generated again (enctyption)
       try {
-        const salt = await bcrypt.genSalt(10); //Generating a new password
+        const salt = await bcrypt.genSalt(10); //Generating a new salt
         req.body.password = await bcrypt.hash(req.body.password, salt); //password hashing
       } catch (err) {
         return res.status(500).json(err);
@@ -20,8 +21,9 @@ router.put("/:id", async (req, res) => {
     try {
       //updating the profile
       const user = await User.findByIdAndUpdate(req.body.userId, {
-        //find the user to update
-        $set: req.body,
+        //search the user to update
+
+        $set: req.body, //updating
       });
       res.status(200).json("Account has been updated");
     } catch (err) {

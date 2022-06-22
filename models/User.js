@@ -57,7 +57,7 @@ const UserSchema = new mongoose.Schema(
       enum: [1, 2, 3],
     },
   },
-  { timestamps: true }
+  { timestamps: true } //After add a new user or update an existing record, timestamp will be automatically updated
 );
 
 module.exports = mongoose.model("User", UserSchema);

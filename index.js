@@ -10,6 +10,7 @@ const authRoute = require("./routes/auth");
 
 dotenv.config();
 
+//Database connection
 mongoose.connect(
   process.env.MONGO_URL,
   { useNewUrlParser: true, useUnifiedTopology: true },
@@ -23,7 +24,7 @@ app.use(express.json());
 app.use(helmet());
 app.use(morgan("common"));
 
-app.use("/api/users", userRoute);
+app.use("/api/users", userRoute); //whenever we go to the address "/api/users", it will run userRoute
 app.use("/api/auth", authRoute);
 
 app.get("/", (req, res) => {
